@@ -12,6 +12,7 @@ ignore:
   - node_modules
   - scripts
   - config
+  - build
   - .git
   - .husky
   - .github
