@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "ls-lint": "ls-lint"
+    "ls-lint": "ls-lint",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
