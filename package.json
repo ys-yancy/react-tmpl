@@ -5,7 +5,8 @@
   "author": "Ys",
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "ls-lint": "ls-lint"
   },
   "husky": {
     "hooks": {
@@ -83,6 +84,9 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "devDependencies": {
+    "chalk": "^4.1.1",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "typescript": "^4.2.4"
   },
   "browserslist": {
