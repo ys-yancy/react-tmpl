@@ -8,7 +8,7 @@ module.exports = {
   bracketSpacing: false,
   jsxBracketSameLine: true,
   arrowParens: 'avoid',
-  insertPragma: true,
+  // insertPragma: true,
   tabWidth: 2,
   useTabs: false,
 };
