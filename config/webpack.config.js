@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const resolve = require('resolve');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -43,6 +44,7 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
+const enableWriteFilePlugin = process.env.ENABLE_WRITE_FILE === 'true';
 
 const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000');
 
@@ -187,7 +189,7 @@ module.exports = function (webpackEnv) {
         : paths.appIndexJs,
     output: {
       // The build folder.
-      path: isEnvProduction ? paths.appBuild : undefined,
+      path: isEnvProduction ? paths.appBuild : paths.appDev,
       // Add /* filename */ comments to generated require()s in the output.
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
@@ -196,7 +198,7 @@ module.exports = function (webpackEnv) {
         ? 'static/js/[name].[contenthash:8].js'
         : isEnvDevelopment && 'static/js/bundle.js',
       // TODO: remove this when upgrading to webpack 5
-      futureEmitAssets: true,
+      futureEmitAssets: enableWriteFilePlugin ? false : true,
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
         ? 'static/js/[name].[contenthash:8].chunk.js'
@@ -636,6 +638,7 @@ module.exports = function (webpackEnv) {
           };
         },
       }),
+
       // Moment.js is an extremely popular library that bundles large locale files
       // by default due to how webpack interprets its code. This is a practical
       // solution that requires the user to opt into importing specific locales.
@@ -702,6 +705,12 @@ module.exports = function (webpackEnv) {
               }),
             },
           },
+        }),
+
+      // 避免热更新文件写入dev目录造成内存压力
+      enableWriteFilePlugin &&
+        new WriteFilePlugin({
+          useHashIndex: true,
         }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.

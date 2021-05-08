@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "dev": "node scripts/start.js 'write'",
     "pre-commit": "ls-lint --config .ls-lint.yaml && lint-staged",
     "commit-msg": "node scripts/verifyCommit.js",
     "postinstall": "husky install"
@@ -81,7 +82,8 @@
     "webpack": "4.44.2",
     "webpack-dev-server": "3.11.1",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "5.1.4"
+    "workbox-webpack-plugin": "5.1.4",
+    "write-file-webpack-plugin": "^4.5.1"
   },
   "devDependencies": {
     "@ls-lint/ls-lint": "^1.9.2",

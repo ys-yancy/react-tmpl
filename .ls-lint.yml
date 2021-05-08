@@ -13,6 +13,7 @@ ignore:
   - scripts
   - config
   - build
+  - dev
   - .git
   - .husky
   - .github
