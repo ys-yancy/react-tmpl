@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@babel/core": "7.12.3",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.13.8",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
     "@svgr/webpack": "5.5.0",
     "@testing-library/jest-dom": "^5.11.4",
